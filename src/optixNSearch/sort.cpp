@@ -4,6 +4,7 @@
 #include <sutil/Timing.h>
 
 #include <thrust/device_vector.h>
+#include <thrust/host_vector.h>
 #include <thrust/sort.h>
 #include <thrust/copy.h>
 #include <thrust/sequence.h>
