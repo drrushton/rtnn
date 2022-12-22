@@ -115,7 +115,7 @@ extern "C" __device__ void insertTopKQ(float key, unsigned int val)
   const unsigned int u3 = optixGetPayload_4();
   unsigned int* vals = reinterpret_cast<unsigned int*>( unpackPointer( u2, u3 ) );
   
-  float max_key = uint_as_float(optixGetPayload_5());
+  float max_key = __uint_as_float(optixGetPayload_5());
   unsigned int max_idx = optixGetPayload_6();
   unsigned int _size = optixGetPayload_7();
   
@@ -124,7 +124,7 @@ extern "C" __device__ void insertTopKQ(float key, unsigned int val)
     vals[_size] = val;
   
     if (_size == 0 || key > max_key) {
-      optixSetPayload_5( float_as_uint(key) ); //max_key = key;
+      optixSetPayload_5( __float_as_uint(key) ); //max_key = key;
       optixSetPayload_6( _size ); //max_idx = _size;
     }
     optixSetPayload_7( _size + 1 ); // _size++;
@@ -149,7 +149,7 @@ extern "C" __device__ void insertTopKQ(float key, unsigned int val)
         //optixSetPayload_6( k ); //max_idx = k;
       }
     }
-    optixSetPayload_5( float_as_uint(max_key) );
+    optixSetPayload_5( __float_as_uint(max_key) );
     optixSetPayload_6( max_idx );
   }
 }
